@@ -1,5 +1,5 @@
 """
-WSGI config for gettingstarted project.
+WSGI config for photobomb roject.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -12,8 +12,8 @@ import sys
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "photobomb.settings")
 
 # Make sure current path and parent is included in sys.path for relative paths to work
-sys.path.append(os.path.dirname(__file__))
-sys.path.append(os.path.join(os.path.dirname(__file__),'../'))
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
 
 from django.core.wsgi import get_wsgi_application
