@@ -8,17 +8,14 @@ from PIL import Image, ImageOps, ImageFont, ImageDraw
 # Create your models here.
 class Document(models.Model):
         docfile = models.ImageField(upload_to='documents/%Y/%m/%d')
-        heading = models.CharField(max_length=256, default='Figure 1 ....')
-        footer = models.CharField(max_length=256, default='Source .....')
+        heading = models.CharField(max_length=256)
+        footer = models.CharField(max_length=256)
 
         def save(self, *args, **kwargs):
-            print(self.heading)
-            print(self.footer)
             # heading and footer not making it
-            # need actual name not the static one but the generated one
+            # The resizing is broken
 
             super(Document, self).save(*args, **kwargs)
-            print(self.docfile.path)
 
             img = process_image(Image.open(self.docfile), self.heading, self.footer)
             img.save(self.docfile.path)
