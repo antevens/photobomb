@@ -4,7 +4,6 @@ from django.http import HttpResponse
 import os
 import PIL
 from PIL import Image, ImageOps, ImageFont, ImageDraw
-from .models import Greeting
 
 
 # Create your views here.
