@@ -18,6 +18,8 @@ class Migration(migrations.Migration):
             fields=[
                  ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                  ('docfile', models.FileField(upload_to=b'documents/%Y/%m/%d')),
+                 ('heading', models.CharField(max_length=256, default='Figure 1 ....')),
+                 ('footer', models.CharField(max_length=256, default='Source .....')),
             ],
         ),
     ]
