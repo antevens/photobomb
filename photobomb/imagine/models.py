@@ -25,6 +25,8 @@ def process_image(img, heading, footer, frame_size=20, iborder_size=2, oborder_s
     """ Processes an image, adding borders, frame, heading, footer and resizing"""
     # Resize image if needed
     ideal_size = right_size(*img.size)
+    print(ideal_size)
+    print(img.size)
     if ideal_size != img.size:
         img = img.resize(ideal_size, PIL.Image.ANTIALIAS)
 
@@ -44,7 +46,7 @@ def process_image(img, heading, footer, frame_size=20, iborder_size=2, oborder_s
     return img
 
 
-def right_size(width, height, max_width=1000.0, max_height=600.0):
+def right_size(width, height, max_width=1000, max_height=600):
     """
     Figures out the width and height of a photo given the max width/height so
     that dimentions are preserved.
@@ -52,9 +54,9 @@ def right_size(width, height, max_width=1000.0, max_height=600.0):
     new_width = float(width)
     new_height = float(height)
     if width > max_width:
-        new_height = (max_width / width) * new_height
+        new_height = new_height * float(max_width) / float(width)
         new_width = max_width
     if new_height > max_height:
-        new_width = (max_height / height) * new_width
+        new_width = new_width * float(max_height) / float(height)
         new_height = max_height
     return (int(new_width), int(new_height))
