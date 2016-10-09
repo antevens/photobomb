@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'photobomb.photobomb.wsgi.application'
+WSGI_APPLICATION = 'photobomb.wsgi.application'
 
 
 # Database
