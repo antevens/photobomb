@@ -18,24 +18,9 @@ def index(request):
     #return render(request, 'index.html')
 
 
-def db(request):
-
-    greeting = Greeting()
-    greeting.save()
-
-    greetings = Greeting.objects.all()
-
-    return render(request, 'db.html', {'greetings': greetings})
-
-
 def process_image(img, heading, footer, frame_size=20, iborder_size=2, oborder_size=4, heading_font_size=11, footer_font_size=8, max_width=1000.0, max_height=600.0):
-#img = Image.open('test0.png')
-#frame_size = 20
-#inner_border_size = 2
-#outer_border_size = 4
-#heading = "Figure 1 ......blahh blah blahh"
-#footer = "Source ......blahh blah blahh"
-# Resize image if needed
+    """ Processes an image, adding borders, frame, heading, footer and resizing"""
+	# Resize image if needed
     ideal_size = right_size(*img.size)
     if ideal_size != img.size:
         img = img.resize(ideal_size, PIL.Image.ANTIALIAS)
@@ -53,7 +38,6 @@ def process_image(img, heading, footer, frame_size=20, iborder_size=2, oborder_s
     img_draw = ImageDraw.Draw(img)
     img_draw.text(heading_position, heading, (0, 0, 0), font=heading_font)
     img_draw.text(footer_position, footer, (0, 0, 0), font=footer_font)
-#    img.save('test-with-border.png')
     return img
 
 
