@@ -11,6 +11,5 @@ import photobomb.imagine.views
 
 urlpatterns = [
     url(r'^$', photobomb.imagine.views.index, name='index'),
-#    url(r'^db', hello.views.db, name='db'),
 #    url(r'^admin/', include(admin.site.urls)),
 ]
