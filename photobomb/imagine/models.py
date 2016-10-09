@@ -1,41 +1,27 @@
 from django.db import models
 from django.conf import settings
 import os
-import time
 import PIL
 from PIL import Image, ImageOps, ImageFont, ImageDraw
 
 
 # Create your models here.
 class Document(models.Model):
-        relative_upload_path = 'documents/%Y/%m/%d'
-        docfile = models.ImageField(upload_to=relative_upload_path)
+        docfile = models.ImageField(upload_to='documents/%Y/%m/%d')
         heading = models.CharField(max_length=256, default='Figure 1 ....')
         footer = models.CharField(max_length=256, default='Source .....')
 
         def save(self, *args, **kwargs):
-            #image_object = Image.open(os.path.join(settings.STATIC_ROOT, 'test0.png'))
-            #self.docfile =
-            img_path = os.path.join(os.path.dirname(self.docfile.path),
-                                    time.strftime(self.relative_upload_path),
-                                    os.path.basename(self.docfile.path))
+            print(self.heading)
+            print(self.footer)
+            # heading and footer not making it
+            # need actual name not the static one but the generated one
 
             super(Document, self).save(*args, **kwargs)
-            img = process_image(Image.open(self.docfile), self.heading, self.footer)
-            img.save(img_path)
-            #img_ext = os.path.splitext(self.docfile.path)[1]
-            #if img_ext not in PIL.Image.EXTENSION:
-            #    PIL.Image.init()
-            #img_format = PIL.Image.EXTENSION[img_ext]
-            #with tempfile.SpooledTemporaryFile() as tmp_img_file:
-            #    img.save(tmp_img_file, img_format)
-            #    self.save(self.docfile.path, File(tmp_img_file))
+            print(self.docfile.path)
 
-            #self.save(*args, **kwargs)
-            #response = HttpResponse(content_type="image/jpeg")
-            #img.save(response, "JPEG")
-            #return response
-            #return render(request, 'index.html')
+            img = process_image(Image.open(self.docfile), self.heading, self.footer)
+            img.save(self.docfile.path)
 
 
 def process_image(img, heading, footer, frame_size=20, iborder_size=2, oborder_size=4, heading_font_size=11, footer_font_size=8, max_width=1000.0, max_height=600.0):
